@@ -72,21 +72,64 @@ void PrintMatrix (int **matrix, int n){
         cout << endl;
     }
 }
-int message (int n){
+int Message (int n){
     if ((n <= 10) && (n >= 1)){
         return n;
     }else {
         cout << "Введите число n от [1 до 10]!!! = ";
         cin >> n;
-        return message (n);
+        return Message (n);
+    }
+}
+void SumInStroka (int** matrix, int n){
+    int sum = 0;
+    for(int i = 0; i < n; ++i){
+        for(int j = 0; j < n; ++j){
+            if (matrix[i][j] < 0){
+                sum = 0;
+                break;
+            }
+            else{
+                sum += matrix[i][j];;
+            }
+        }
+        if (sum != 0){
+        cout << "Сумма в "<< i+1 << " строке = " << sum << endl;
+        sum = 0;
+        }
+    }
+}
+void MinNumber(int** matrix, int n){
+    if(n > 1){
+        int minimum = matrix[0][1];
+        for (int k = 1; k < n; ++k){
+            for (int i = 0; i < n - k; ++i){
+                if (matrix[i][i + k] < minimum){
+                    minimum = matrix[i][i + k];
+                }
+            }
+        }
+        for (int k = 1; k < n; ++k){
+            for (int i = 0; i < n - k; ++i){
+                if (matrix[i + k][i] < minimum){
+                    minimum = matrix[i + k][i];
+                }
+            }
+        }
+        cout << "Минимальное значение с паралельной диагонали = " << minimum << endl;
+    }
+    else {
+        cout << "В матрице нет диагоналей паралельных главной";
     }
 }
 int main(){
     int n;
     cout << "Введите число n от [1 до 10] = ";
     cin >> n;
-    n = message (n);
+    n = Message (n);
     int **matrix = CreateMatrix(n);
     FillMatrix(matrix, n);
     PrintMatrix (matrix, n);
+    SumInStroka(matrix, n);
+    MinNumber(matrix, n);
 }
