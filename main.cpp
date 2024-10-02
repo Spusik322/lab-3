@@ -122,6 +122,12 @@ void MinNumber(int** matrix, int n){
         cout << "В матрице нет диагоналей паралельных главной";
     }
 }
+void DeleteMatrix(int** matrix,int n){
+        for(int i = 0;i < n; ++i){
+            delete[]matrix[i];
+        }
+        delete[]matrix;
+    }
 int main(){
     int n;
     cout << "Введите число n от [1 до 10] = ";
@@ -132,4 +138,6 @@ int main(){
     PrintMatrix (matrix, n);
     SumInStroka(matrix, n);
     MinNumber(matrix, n);
+    DeleteMatrix(matrix, n);
+    return 0;
 }
